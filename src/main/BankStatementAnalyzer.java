@@ -1,5 +1,7 @@
 package main;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,11 +29,25 @@ public class BankStatementAnalyzer {
 
         final List<BankTransaction> transactions =
                 bankStatementProcessor.findTransactionGreaterThanEqualStreamAPI(50);
+
         final BankStatementProcessor bankStatementProcessor1
                 = new BankStatementProcessor(transactions);
 
         collectSummary(bankStatementProcessor1);
+
+        SummaryStatistic summaryStatistic = new SummaryStatistic(bankStatementProcessor.calculateTotalAmount(),
+                bankStatementProcessor.getMaxTransactionFromTo(LocalDate.MIN, LocalDate.MAX).getAmount(),
+                bankStatementProcessor.getMaxTransactionFromTo(LocalDate.MIN, LocalDate.MAX).getAmount(),
+                bankStatementProcessor.getAverage(),
+                bankStatementProcessor.getCount());
+        HtmlExporter htmlExporter = new HtmlExporter();
+        String htmlFile = htmlExporter.export(summaryStatistic);
+        BufferedWriter writer = new BufferedWriter(new FileWriter("HtmlFile.html"));
+        writer.write(htmlFile);
+
+        writer.close();
     }
+
     private static void collectSummary(final BankStatementProcessor bankStatementProcessor){
         System.out.println("Total: "+bankStatementProcessor.calculateTotalAmount());
         //System.out.println();

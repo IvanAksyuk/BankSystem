@@ -45,12 +45,12 @@ public class BankStatementProcessor {
     }
 
     public BankTransaction getMaxTransactionFromTo(final LocalDate dateFrom, final LocalDate dateTo){
-        boolean valueIsExist = false;
-        BankTransaction maxBankTransaction = new BankTransaction();
+        BankTransaction maxBankTransaction = bankTransactions.get(0);
+
         for(final BankTransaction bankTransaction: bankTransactions){
             if(bankTransaction.getDate().isAfter(dateFrom) && bankTransaction.getDate().isBefore(dateTo)){
-               if(!valueIsExist || maxBankTransaction.getAmount()<bankTransaction.getAmount()){
-                 valueIsExist = true;
+               if(maxBankTransaction.getAmount()<bankTransaction.getAmount()){
+
                  maxBankTransaction = bankTransaction;
 
                }
@@ -60,18 +60,25 @@ public class BankStatementProcessor {
     }
 
     public BankTransaction getMinTransactionFromTo(final LocalDate dateFrom, final LocalDate dateTo){
-        boolean valueIsExist = false;
         BankTransaction minBankTransaction = new BankTransaction();
         for(final BankTransaction bankTransaction: bankTransactions){
             if(bankTransaction.getDate().isAfter(dateFrom) && bankTransaction.getDate().isBefore(dateTo)){
-                if(!valueIsExist || minBankTransaction.getAmount()>bankTransaction.getAmount()){
-                    valueIsExist = true;
+                if( minBankTransaction.getAmount()>bankTransaction.getAmount()){
+
                     minBankTransaction = bankTransaction;
 
                 }
             }
         }
         return minBankTransaction;
+    }
+
+    public double getAverage(){
+        return calculateTotalAmount()/getCount();
+    }
+
+    public int getCount(){
+        return bankTransactions.size();
     }
 
     public List<BankTransaction> findTransaction(final BankTransactionFilter bankTransactionFilter){
