@@ -15,7 +15,7 @@ public class BankStatementAnalyzer {
         final Path path = Paths.get(RESOURCES+fileName);
 
         final List<String> lines = Files.readAllLines(path);
-        double total = 0;
+
 
 
         final List<BankTransaction> bankTransactions = bankStatementParser.parseLinesFrom(lines);
@@ -26,7 +26,7 @@ public class BankStatementAnalyzer {
         collectSummary(bankStatementProcessor);
 
         final List<BankTransaction> transactions =
-                bankStatementProcessor.findTransactionGreaterThanEqual(50);
+                bankStatementProcessor.findTransactionGreaterThanEqualStreamAPI(50);
         final BankStatementProcessor bankStatementProcessor1
                 = new BankStatementProcessor(transactions);
 

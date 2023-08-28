@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class BankStatementProcessor {
     private final List<BankTransaction> bankTransactions;
@@ -83,5 +86,15 @@ public class BankStatementProcessor {
 
     public List<BankTransaction> findTransactionGreaterThanEqual(final int amount){
         return findTransaction(bankTransaction -> bankTransaction.getAmount()>=amount);
+    }
+    public List<BankTransaction> findTransactionStreamAPI(final BankTransactionFilter bankTransactionFilter){
+        return bankTransactions
+                .stream()
+                .filter(bankTransactionFilter::test).
+                collect(toList());
+    }
+
+    public List<BankTransaction> findTransactionGreaterThanEqualStreamAPI(final int amount){
+        return findTransactionStreamAPI(bankTransaction -> bankTransaction.getAmount()>=amount);
     }
 }
