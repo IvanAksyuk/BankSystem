@@ -43,7 +43,12 @@ public class BankStatementAnalyzer {
         String htmlFile = htmlExporter.export(summaryStatistic);
         BufferedWriter writer = new BufferedWriter(new FileWriter("HtmlFile.html"));
         writer.write(htmlFile);
+        writer.close();
 
+        JsonExporter jsonExporter = new JsonExporter();
+        String jsonfile = jsonExporter.export(summaryStatistic);
+        writer = new BufferedWriter(new FileWriter("JsonFile.json"));
+        writer.write(jsonfile);
         writer.close();
     }
 
