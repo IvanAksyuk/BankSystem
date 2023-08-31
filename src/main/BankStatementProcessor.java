@@ -60,7 +60,7 @@ public class BankStatementProcessor {
     }
 
     public BankTransaction getMinTransactionFromTo(final LocalDate dateFrom, final LocalDate dateTo){
-        BankTransaction minBankTransaction = new BankTransaction();
+        BankTransaction minBankTransaction = bankTransactions.get(0);
         for(final BankTransaction bankTransaction: bankTransactions){
             if(bankTransaction.getDate().isAfter(dateFrom) && bankTransaction.getDate().isBefore(dateTo)){
                 if( minBankTransaction.getAmount()>bankTransaction.getAmount()){

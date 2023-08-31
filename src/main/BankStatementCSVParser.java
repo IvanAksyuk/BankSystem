@@ -24,7 +24,8 @@ public List<BankTransaction> parseLinesFrom(final List<String> lines){
 
     for(final String line: lines) {
 
-        if(!line.isEmpty())  bankTransactions.add(parseFrom(line));
+        bankTransactions.add(parseFrom(line));
+
 
     }
 
