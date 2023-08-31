@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BankStatementAnalyzer {
 
-    private static final String RESOURCES = "C:\\Users\\demon\\IdeaProjects\\BankSystem\\src\\";
+    private static final String RESOURCES = "C:\\Users\\demon\\IdeaProjects\\BankSystemJavaAksyuk\\src\\";
     public void analyze(final String fileName, final BankStatementParser bankStatementParser) throws IOException {
         final Path path = Paths.get(RESOURCES+fileName);
 
@@ -27,7 +27,7 @@ public class BankStatementAnalyzer {
         collectSummary(bankStatementProcessor);
 
         final List<BankTransaction> transactions =
-                bankStatementProcessor.findTransactionGreaterThanEqualStreamAPI(50);
+                bankStatementProcessor.findTransactionGreaterThanEqualStreamAPI(10);
 
         final BankStatementProcessor bankStatementProcessor1
                 = new BankStatementProcessor(transactions);
