@@ -11,6 +11,7 @@ private static final DateTimeFormatter DATE_PATTERN = DateTimeFormatter.ofPatter
 public BankTransaction parseFrom(final String line){
     final String[] columns = line.split(" ");
 
+
     final LocalDate date = LocalDate.parse(columns[0], DATE_PATTERN);
     final double amount = Double.parseDouble(columns[1]);
     final int type = Integer.parseInt(columns[2]);
