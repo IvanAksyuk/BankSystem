@@ -34,10 +34,10 @@ public class BankStatementProcessor {
                 bankTransactions.getDate().getMonth() == month ? acc+ bankTransactions.getAmount() : acc);
     }
 
-    public double calculateTotalForCategory(final int category){
+    public double calculateTotalForCategory(final String category){
         double total = 0;
         for(final BankTransaction bankTransaction: bankTransactions){
-            if(bankTransaction.getType()==category){
+            if(bankTransaction.getType().equals(category)){
                 total += bankTransaction.getAmount();
             }
         }

@@ -6,9 +6,9 @@ import java.util.Objects;
 public class BankTransaction {
     private final LocalDate date;
     private final double amount;
-    private final int type;
+    private final String type;
 
-    public BankTransaction(final LocalDate date, final double amount, final int type){
+    public BankTransaction(final LocalDate date, final double amount, final String type){
         this.date = date;
         this.amount = amount;
         this.type = type;
@@ -16,7 +16,7 @@ public class BankTransaction {
     public BankTransaction(){
         this.date = null;
         this.amount = 0;
-        this.type = 0;
+        this.type = null;
     }
     public LocalDate getDate(){
         return date;
@@ -24,7 +24,7 @@ public class BankTransaction {
     public double getAmount(){
         return amount;
     }
-   public int getType(){
+   public String getType(){
         return type;
    }
    @Override
@@ -39,7 +39,7 @@ public class BankTransaction {
         BankTransaction that = (BankTransaction) o;
         return  Double.compare(that.amount, amount) ==0 &&
                 date.equals(that.date) &&
-                that.type == type;
+                that.type.equals(type);
    }
 
    @Override

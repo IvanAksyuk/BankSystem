@@ -14,14 +14,16 @@ public BankTransaction parseFrom(final String line){
 
     final LocalDate date = LocalDate.parse(columns[0], DATE_PATTERN);
     final double amount = Double.parseDouble(columns[1]);
-    final int type = Integer.parseInt(columns[2]);
+    final String type = columns[2];
 
     return new BankTransaction(date, amount, type);
 }
 
 public List<BankTransaction> parseLinesFrom(final List<String> lines){
     final List<BankTransaction> bankTransactions = new ArrayList<>();
+
     for(final String line: lines) {
+
         bankTransactions.add(parseFrom(line));
     }
     return bankTransactions;
